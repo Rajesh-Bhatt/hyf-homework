@@ -2,7 +2,7 @@
 
 
 //First array Names:
-let firstWords = [
+const firstWords = [
     "Gorgeous",
     "Creative",
     "Extraordinary",
@@ -16,7 +16,7 @@ let firstWords = [
   ];
   
   //Second array Names:
-  let secondWords = [
+  const secondWords = [
     "Vision",
     "Thought",
     "Concepts",
@@ -29,8 +29,8 @@ let firstWords = [
     "Product",
   ];
   const randomNumber = Math.floor(Math.random() * 10);
-  let startupName = firstWords[randomNumber] + " " + secondWords[randomNumber];
-  let nameLength = startupName.length;
+  const startupName = firstWords[randomNumber] + " " + secondWords[randomNumber];
+  const nameLength = startupName.length;
   console.log(`The startup: "${startupName}" contains ${nameLength} characters.`);
   
   
