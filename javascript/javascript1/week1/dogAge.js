@@ -1,10 +1,10 @@
 //2. Goodboy-Oldboy (A dog age calculator)
 
-let dogYearOfBirth = 2016;
-let dogYearFuture = 2027;
-let shouldShowResultInDogYears = true;
+const dogYearOfBirth = 2016;
+const dogYearFuture = 2027;
+const shouldShowResultInDogYears = true;
 
-let dogYear;
+const dogYear;
 if (shouldShowResultInDogYears) {
   dogYear = dogYearFuture - dogYearOfBirth;
 } else {
