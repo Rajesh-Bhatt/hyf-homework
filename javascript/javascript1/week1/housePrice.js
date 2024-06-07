@@ -14,11 +14,11 @@ const juliaHouseDepth = 11;
 const juliaHouseGardenSize = 70;
 const juliaHouseRealPrice = 1000000;
 
-const peterVolume = peterHouseWidth * peterHouseHeight * peterHouseDepth
-const juliaVolume = juliaHouseWidth * juliaHouseHeigth * juliaHouseDepth
+const peterHouseVolume = peterHouseWidth * peterHouseHeight * peterHouseDepth
+const juliaHouseVolume = juliaHouseWidth * juliaHouseHeigth * juliaHouseDepth
 
-const peterHousePrice = peterVolume * 2.5 * 1000 + peterHouseGardenSize * 300;
-const juliaHousePrice = juliaVolume * 2.5 * 1000 + juliaHouseGardenSize * 300;
+const peterHousePrice = peterHouseVolume * 2.5 * 1000 + peterHouseGardenSize * 300;
+const juliaHousePrice = juliaHouseVolume * 2.5 * 1000 + juliaHouseGardenSize * 300;
 
 if (peterHousePrice > peterHouseRealPrice) {
   console.log("Peter is paying too much for the house.");
