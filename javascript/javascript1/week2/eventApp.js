@@ -22,8 +22,6 @@ function getEventWeekday(daysFromToday) {
   }
 }
 
-// With todays weekday a friday
-console.log(getEventWeekday(8)); // Logs out "Saturday"
-
-// With todays weekday a Friday
-console.log(getEventWeekday(2)); // Logs out "Sunday"
+//Uses Examples:
+console.log(getEventWeekday(8));
+console.log(getEventWeekday(2));
