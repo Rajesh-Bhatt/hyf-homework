@@ -14,14 +14,9 @@ function getEventWeekday(daysFromToday) {
   ];
 
   const indexes = daysFromToday + dayNumber;
-  if (indexes >= 7) {
-    const r = indexes % 7; //since nameOfDays has only 7 elements need to find the remainder
-    return nameOfDays[r];
-  } else {
-    return nameOfDays[indexes];
-  }
+  return nameOfDays[indexes % 7];
 }
 
 //Uses Examples:
+console.log(getEventWeekday(4));
 console.log(getEventWeekday(8));
-console.log(getEventWeekday(2));
