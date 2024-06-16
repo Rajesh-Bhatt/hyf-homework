@@ -16,7 +16,7 @@ function getFullName(firstName, surName, useFormalName, isMadam) {
 
 const fullName1 = getFullName("Rajesh", "Bhatt", false); //Case for without Formal Name
 const fullName2 = getFullName("Benjamin", "Hughes", true, false); //Case for lord (male) user
-const fullName3 = getFullName("Joan", "Nielsen", undefined); //Case for madam (female) user
+const fullName3 = getFullName("Joan", "Nielsen", undefined); //Case for undefined useFormalName user(will return fullname only)
 const fullName4 = getFullName("", "", true, true); //Case for empty string firstName and SurName
 
 console.log(fullName1); //Printing values in console
