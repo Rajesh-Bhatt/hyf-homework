@@ -1,22 +1,23 @@
 //Flight booking getFullname function with use of formals:
-function getFullname(firstname, surname, useFormalName, isMistress) {
-  if (firstname === "" && surname === "") {
-    return "Please enter your firstname and surname";
+function getFullName(firstName, surName, useFormalName, isMadam) {
+  const fullName = firstName + " " + surName;
+  if (!firstName && !surName) {
+    return "Please enter your Firstname and Surname";
   } else if (useFormalName) {
-    if (isMistress) {
-      return `Mistress ${firstname} ${surname}`;
+    if (isMadam) {
+      return "Madam " + fullName;
     } else {
-      return `Lord ${firstname} ${surname}`;
+      return "Lord " + fullName;
     }
   } else {
-    return `${firstname} ${surname}`;
+    return fullName;
   }
 }
 
-const fullName1 = getFullname("Rajesh", "Bhatt", false, false); //Case for without Formal Name
-const fullName2 = getFullname("Benjamin", "Hughes", true, false); //Case for lord
-const fullName3 = getFullname("Joan", "Nielsen", true, true); //Case for mistress
-const fullName4 = getFullname("", "", true, true); //Case for emply string firstname and surname
+const fullName1 = getFullName("Rajesh", "Bhatt", false); //Case for without Formal Name
+const fullName2 = getFullName("Benjamin", "Hughes", true, false); //Case for lord (male) user
+const fullName3 = getFullName("Joan", "Nielsen", undefined); //Case for madam (female) user
+const fullName4 = getFullName("", "", true, true); //Case for empty string firstName and SurName
 
 console.log(fullName1); //Printing values in console
 console.log(fullName2); //Printing values in console
