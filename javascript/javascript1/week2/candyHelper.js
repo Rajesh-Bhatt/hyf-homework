@@ -15,22 +15,26 @@ function addCandy(candyType, weight) {
     console.log("Invalid candy type");
   }
 }
-const amountToSpend = Math.random() * 100;
 function canBuyMoreCandy() {
+  const amountToSpend = Math.random() * 100;
   let totalSpent = 0; // total amount spent on buying candies
   for (let i = 0; i < boughtCandyPrices.length; i++) {
     totalSpent += boughtCandyPrices[i];
   }
-  return totalSpent < amountToSpend;
-}
-if (canBuyMoreCandy()) {
-  console.log("You can buy more, so please do!!!");
-} else {
-  console.log("Enough candy for you!!!");
+  if (totalSpent < amountToSpend) {
+    console.log("You can buy more, so please do!!!");
+    return true;
+  } else {
+    console.log("Enough candy for you!!!");
+    return false;
+  }
 }
 
 addCandy("sweet", 20); //Case for valid type of candy
 addCandy("chocolate", 30); //Case for valid type of candy
 addCandy("toffee", 40); //Case for valid type of candy
 addCandy("chewing-gum", 25); //Case for valid type of candy
-addCandy("", 15); //Case for invalid type of candy
+addCandy(""); //Case for invalid type of candy
+
+const canBuyMoreCandyResult = canBuyMoreCandy();
+console.log(canBuyMoreCandyResult);
