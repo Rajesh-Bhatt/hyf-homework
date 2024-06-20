@@ -1,16 +1,16 @@
 //Array item removal program:
 
 const names = [
-  "Peter",
-  "Ahmad",
-  "Yana",
+  "peter",
+  "ahmad",
+  "yana",
   "kristina",
-  "Rasmus",
-  "Samuel",
+  "rasmus",
+  "samuel",
   "katrine",
-  "Tala",
+  "tala",
 ];
-const nameToRemove = "Ahmad";
+const nameToRemove = "ahmad";
 const index = names.indexOf(nameToRemove);
 if (index > -1) {
   // only splice array when the item is found
@@ -18,4 +18,4 @@ if (index > -1) {
 } else {
   console.log("Name is not available in the array.");
 }
-console.log(names); // ['Peter', 'Yana', 'kristina', 'Rasmus', 'Samuel', 'katrine', 'Tala']
+console.log(names); // ['peter', 'yana', 'kristina', 'rasmus', 'samuel', 'katrine', 'tala']
