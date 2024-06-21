@@ -30,7 +30,7 @@ function getNote(id) {
   console.error("Notes not found! Please provide the valid note ID from 1-4.");
 }
 
-const firstNote = getNote(0);
+const firstNote = getNote(1);
 console.log(firstNote); // Log out: {content: 'Pick up groceries', id: 1}
 
 //Log out notes:
