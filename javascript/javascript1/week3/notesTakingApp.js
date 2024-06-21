@@ -7,6 +7,7 @@ function saveNote(content, id) {
   const note = { content: content, id: id };
   notes.push(note);
 }
+
 saveNote("Pick up groceries", 1);
 saveNote("Do laundry", 2);
 saveNote("Cook the Food", 3);
@@ -26,10 +27,10 @@ function getNote(id) {
       return notes[i];
     }
   }
-  console.error("Notes not found!");
+  console.error("Notes not found! Please provide the valid note ID from 1-4.");
 }
 
-const firstNote = getNote(1);
+const firstNote = getNote(0);
 console.log(firstNote); // Log out: {content: 'Pick up groceries', id: 1}
 
 //Log out notes:
