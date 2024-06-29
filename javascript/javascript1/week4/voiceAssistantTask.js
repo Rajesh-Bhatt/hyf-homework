@@ -12,43 +12,47 @@ const quotes = [
   "If you can dream it, you can do it.",
 ];
 
-// For nice to meet you, benjamin.
+// For nice to meet you, Benjamin.
 function getReply(command) {
-  command = command.toLowerCase();
+  command = command.toLowerCase().trim();
   if (command.startsWith("hello my name is ")) {
-    const name = command.replace("hello my name is ", "");
+    const name = command.replace("hello my name is ", "").trim();
     if (personName === name) {
       return `You have already introduced yourself as ${personName}.`;
     } else {
       personName = name;
-      return `Nice to meet you, ${personName}.`;
+      return `Nice to meet you, ${
+        personName.charAt(0).toUpperCase() + personName.slice(1)
+      }.`;
     }
   }
 
-  // For your name is benjamin.
-  if (command === "what is my name") {
+  // For your name is Benjamin.
+  if (command.includes("what is my name", "?")) {
     if (personName) {
-      return `Your name is ${personName}.`;
+      return `Your name is ${
+        personName.charAt(0).toUpperCase() + personName.slice(1)
+      }.`;
     } else {
       return "I do not know your name yet.";
     }
   }
   // For fishing and singing in the shower added to your todo.
   if (command.startsWith("add ")) {
-    const todo = command.replace("add ", "").replace(" to my todo", "");
-    toDos.push(todo);
-    return `${todo} added to your todo.`;
+    const toDo = command.replace("add ", "").replace(" to my todo", "");
+    toDos.push(toDo);
+    return `${toDo} added to your todo.`;
   }
 
-  // For Removed  fishing from your todo.
+  // For removed  fishing from your todo.
   if (command.startsWith("remove")) {
-    const todo = command.replace("remove", "").replace(" from my todo", "");
-    const index = toDos.indexOf(todo);
+    const toDo = command.replace("remove", "").replace(" from my todo", "");
+    const index = toDos.indexOf(toDo);
     if (index !== -1) {
-      todos.splice(index, 1);
-      return `${todo} is not in your todo list.`;
+      toDos.splice(index, 1);
+      return `${toDo} is not in your todo list.`;
     } else {
-      return `Removed ${todo} from your todo.`;
+      return `Removed ${toDo} from your todo.`;
     }
   }
 
@@ -70,7 +74,7 @@ function getReply(command) {
     return `Today is ${day}. of ${month} ${year}`;
   }
 
-  // For mathemitacl calsulation:
+  // For mathematical calculation/ expression:
   if (command.startsWith("what is ")) {
     const expression = command.replace("what is ", "");
     try {
@@ -115,5 +119,5 @@ console.log(getReply("Remove fishing from my todo")); // "Removed fishing from y
 console.log(getReply("What is on my todo")); // "You have 2 todos: fishing, singing in the shower."
 console.log(getReply("What day is it today")); // "Should show the current date."
 console.log(getReply("What is 4 * 12")); // "The result is 48."
-console.log(getReply("Set a timer for 4 minute")); // "Timer set for 4 minutes. After 4 minutes, 'Timer done' is logged in console."
+console.log(getReply("Set a timer for 4 minute")); // "Timer set for 4 minutes. After 4 minutes, 'Timer done' message is logged in console."
 console.log(getReply("Tell me a quote")); // "Should show the random quote."
