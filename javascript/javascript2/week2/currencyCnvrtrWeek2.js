@@ -1,132 +1,215 @@
-// currencyConverter.js
-
-const exRates = {
-  timestamp: Date.now(),
-  base: "USD",
-  date: new Date().toISOString().split("T")[0],
-  exRates: {
-    USD: 1.23396,
-    GBP: 0.88204,
-    EUR: 0.92398,
-    CAD: 1.36325,
+// An array of currency exchange rate object:
+const allCurrencyRates = [
+  {
+    base: "USD",
+    exRates: {
+      USD: 1,
+      GBP: 0.88204,
+      EUR: 0.92398,
+      CAD: 1.36325,
+      SEK: 10.6651,
+      DKK: 6.85431,
+    },
   },
-};
+  {
+    base: "GBP",
+    exRates: {
+      GBP: 1,
+      USD: 1.23396,
+      EUR: 0.92398,
+      CAD: 1.36325,
+      SEK: 13.8457,
+      DKK: 8.88382,
+    },
+  },
+  {
+    base: "EUR",
+    exRates: {
+      EUR: 1,
+      USD: 1.23396,
+      GBP: 0.88204,
+      CAD: 1.36325,
+      SEK: 11.4933,
+      DKK: 7.46027,
+    },
+  },
+  {
+    base: "CAD",
+    exRates: {
+      CAD: 1,
+      USD: 1.23396,
+      GBP: 0.88204,
+      EUR: 0.92398,
+      SEK: 7.81929,
+      DKK: 5.03486,
+    },
+  },
+  {
+    base: "SEK",
+    exRates: {
+      SEK: 1,
+      USD: 0.09484,
+      GBP: 0.07364,
+      EUR: 0.08609,
+      CAD: 0.01394,
+      DKK: 0.64985,
+    },
+  },
+  {
+    base: "DKK",
+    exRates: {
+      DKK: 1,
+      USD: 0.14612,
+      GBP: 0.11251,
+      EUR: 0.13402,
+      CAD: 0.19867,
+      SEK: 1.57565,
+    },
+  },
+];
 
-const addNewRateform = document.getElementById("addNewRateform");
-const convertCurrencyForm = document.getElementById("convertCurrencyForm");
-const updateRateForm = document.getElementById("updateRateForm");
-const addRateResult = document.getElementById("addRateResult");
-const convertCurrencyResult = document.getElementById("convertCurrencyResult");
-const updateRateResult = document.getElementById("updateRateResult");
-const searchRateResult = document.getElementById("searchRateResult");
-
-// Search function for currency:
-function onRateSearch(event) {
+// Search function for all currency:
+document.getElementById("searchRate").addEventListener("submit", (event) => {
   event.preventDefault();
   const searchFrom = document
     .getElementById("search-from")
-    .value.trim()
-    .toUpperCase();
+    .value.toUpperCase()
+    .trim();
   const searchTo = document
     .getElementById("search-to")
-    .value.trim()
-    .toUpperCase();
+    .value.toUpperCase()
+    .trim();
+  const searchResult = document.getElementById("searchRateResult");
 
-  if (exRates.base === searchFrom && exRates.exRates[searchTo]) {
-    const searchedRate = exRates.exRates[searchTo];
-    searchRateResult.textContent = `Your search rate is: 1${searchFrom} = ${searchedRate} ${searchTo}`;
+  const rateObject = allCurrencyRates.find((rate) => rate.base === searchFrom);
+  if (rateObject && rateObject.exRates[searchTo]) {
+    const rate = rateObject.exRates[searchTo];
+    searchResult.textContent = `Your search rate is: 1 ${searchFrom} = ${rate} ${searchTo}`;
+    searchResult.style.color = "black";
   } else {
-    searchRateResult.textContent = "Your search currency does not exist!!!";
+    searchResult.textContent = "Your search currency do not exist!";
+    searchResult.style.color = "darkred";
   }
-}
-document.getElementById("searchRate").onsubmit = onRateSearch;
+});
 
 // New exchange rate creation function:
-function onNewRateFormSubmitted(event) {
-  event.preventDefault();
-  const baseCurrency = document
-    .getElementById("base-currency")
-    .value.trim()
-    .toUpperCase();
-  const targetCurrency = document
-    .getElementById("target-currency")
-    .value.trim()
-    .toUpperCase();
-  const rate = parseFloat(document.getElementById("exchange-rate").value);
+document
+  .getElementById("addNewRateform")
+  .addEventListener("submit", (event) => {
+    event.preventDefault();
+    const baseCurrency = document
+      .getElementById("base-currency")
+      .value.toUpperCase()
+      .trim();
+    const targetCurrency = document
+      .getElementById("target-currency")
+      .value.toUpperCase()
+      .trim();
+    const rate = parseFloat(document.getElementById("exchange-rate").value);
 
-  exRates.base = baseCurrency;
-  exRates.exRates[targetCurrency] = rate;
+    let rateObject = allCurrencyRates.find(
+      (rate) => rate.base === baseCurrency
+    );
+    if (!rateObject) {
+      rateObject = { base: baseCurrency, exRates: {} };
+      allCurrencyRates.push(rateObject);
+    }
+    rateObject.exRates[targetCurrency] = rate;
 
-  console.log("Inserted new rate:", exRates);
-  addRateResult.textContent = `New rate is: 1 ${baseCurrency} = ${rate} ${targetCurrency}`;
-}
-document.getElementById("addNewRateform").onsubmit = onNewRateFormSubmitted;
+    console.log("Inserted new rate is:", allCurrencyRates);
+    const addRateResult = document.getElementById("addRateResult");
+    addRateResult.textContent = `Inserted new rate: 1 ${baseCurrency} = ${rate} ${targetCurrency}`;
+    addRateResult.style.color = "black";
+    displayRates(allCurrencyRates);
+  });
 
 // Currency conversion function:
-function onConversionFormSubmitted(event) {
-  event.preventDefault();
-  const amount = parseFloat(document.getElementById("amount").value);
-  const fromCurrency = document
-    .getElementById("from-currency")
-    .value.trim()
-    .toUpperCase();
-  const toCurrency = document
-    .getElementById("to-currency")
-    .value.trim()
-    .toUpperCase();
-
-  if (exRates.base === fromCurrency && exRates.exRates[toCurrency]) {
-    const convertedAmount = amount * exRates.exRates[toCurrency];
-    convertCurrencyResult.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(
-      2
-    )} ${toCurrency}`;
-  } else {
-    convertCurrencyResult.textContent = "Conversion rate does not exist.";
-  }
-}
-document.getElementById("convertCurrencyForm").onsubmit =
-  onConversionFormSubmitted;
+document
+  .getElementById("convertCurrencyForm")
+  .addEventListener("submit", (event) => {
+    event.preventDefault();
+    const amount = parseFloat(document.getElementById("amount").value);
+    const fromCurrency = document
+      .getElementById("from-currency")
+      .value.toUpperCase()
+      .trim();
+    const toCurrency = document
+      .getElementById("to-currency")
+      .value.toUpperCase()
+      .trim();
+    const rateObject = allCurrencyRates.find(
+      (rate) => rate.base === fromCurrency
+    );
+    if (rateObject && rateObject.exRates[toCurrency]) {
+      const convertedAmount = amount * rateObject.exRates[toCurrency];
+      const conversionResult = document.getElementById("convertCurrencyResult");
+      conversionResult.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(
+        2
+      )} ${toCurrency}`;
+    } else {
+      const conversionResult = document.getElementById("convertCurrencyResult");
+      conversionResult.textContent = "Conversion rate not available.";
+    }
+  });
 
 // Update existing currency rate function:
-function onUpdateRateSubmitted(event) {
-  event.preventDefault();
-  const baseCurrency = document
-    .getElementById("updateBaseCurrency")
-    .value.trim()
-    .toUpperCase();
-  const targetCurrency = document
-    .getElementById("updateTargetCurrency")
-    .value.trim()
-    .toUpperCase();
-  const rate = parseFloat(document.getElementById("updateExchangeRate").value);
+document
+  .getElementById("updateRateForm")
+  .addEventListener("submit", (event) => {
+    event.preventDefault();
+    const baseCurrency = document
+      .getElementById("updateBaseCurrency")
+      .value.toUpperCase()
+      .trim();
+    const targetCurrency = document
+      .getElementById("updateTargetCurrency")
+      .value.toUpperCase()
+      .trim();
+    const rate = parseFloat(
+      document.getElementById("updateExchangeRate").value
+    );
 
-  if (exRates.base === baseCurrency) {
-    exRates.exRates[targetCurrency] = rate;
-    console.log("Updated rate:", exRates);
-    updateRateResult.textContent = `Updated rate: 1 ${baseCurrency} = ${rate} ${targetCurrency}`;
-  } else {
-    updateRateResult.textContent = `Base currency don't match with the existing base currency: "${exRates.base}"`;
-  }
-}
-document.getElementById("updateRateForm").onsubmit = onUpdateRateSubmitted;
+    const rateObject = allCurrencyRates.find(
+      (rate) => rate.base === baseCurrency
+    );
+    if (rateObject) {
+      rateObject.exRates[targetCurrency] = rate;
+      console.log("Updated rate is:", allCurrencyRates);
+      const updateConfirmation = document.getElementById("updateRateResult");
+      updateConfirmation.textContent = `Updated rate: 1 ${baseCurrency} = ${rate} ${targetCurrency}`;
+      updateConfirmation.style.color = "black";
+      displayRates(allCurrencyRates);
+    } else {
+      const updateConfirmation = document.getElementById("updateRateResult");
+      updateConfirmation.textContent = `Base currency do not match with any existing base currency.`;
+    }
+  });
 
 // To show the current rate listing:
+function displayRates(ratesArray) {
+  const ratesTableBody = document.querySelector("#exRateTable tbody");
+  ratesTableBody.innerHTML = "";
 
-document.getElementById("date").textContent = `Rates as of: ${exRates.date}`;
+  ratesArray.forEach((rateObject) => {
+    const baseCurrency = rateObject.base;
+    for (const [targetCurrency, rate] of Object.entries(rateObject.exRates)) {
+      const rateRow = document.createElement("tr");
 
-const tableBody = document.querySelector("#exchangeRatesTable tbody");
-const rates = exRates.exRates;
+      const baseCurrencyCell = document.createElement("td");
+      baseCurrencyCell.textContent = baseCurrency;
+      rateRow.appendChild(baseCurrencyCell);
 
-for (const [currency, rate] of Object.entries(rates)) {
-  const row = document.createElement("tr");
-  const currencyCell = document.createElement("td");
-  const rateCell = document.createElement("td");
+      const targetCurrencyCell = document.createElement("td");
+      targetCurrencyCell.textContent = targetCurrency;
+      rateRow.appendChild(targetCurrencyCell);
 
-  currencyCell.textContent = currency;
-  rateCell.textContent = rate.toFixed(5);
+      const rateCell = document.createElement("td");
+      rateCell.textContent = rate;
+      rateRow.appendChild(rateCell);
 
-  row.appendChild(currencyCell);
-  row.appendChild(rateCell);
-
-  tableBody.appendChild(row);
+      ratesTableBody.appendChild(rateRow);
+    }
+  });
 }
+
+displayRates(allCurrencyRates);
