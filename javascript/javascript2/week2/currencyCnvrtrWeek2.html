@@ -117,20 +117,19 @@
       <div id="currentCurrency" class="currentCurrency">
         <h2>Current Exchange Rates:</h2>
       </div>
-      <p id="date"></p>
-      <table id="exchangeRatesTable">
-        <thead>
-          <tr>
-            <th>Currency</th>
-            <th>Rate</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Rates will be dynamically inserted here -->
-        </tbody>
-      </table>
+      <div id="currencyGrid" class="currencyGrid">
+        <table id="exRateTable">
+          <thead>
+            <tr>
+              <th>Base Currency</th>
+              <th>Target Currency</th>
+              <th>Exchange Rate</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
-
     <script src="currencyCnvrtrWeek2.js"></script>
   </body>
 </html>
