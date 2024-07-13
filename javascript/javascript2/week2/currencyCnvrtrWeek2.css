@@ -87,10 +87,11 @@ button {
 }
 
 table {
-  width: 70%;
+  width: 80%;
   margin: auto;
   border-collapse: collapse;
-  margin-top: 20px;
+  border-color: white;
+  margin-bottom: 20px;
 }
 table,
 th,
@@ -104,5 +105,5 @@ td {
 }
 th {
   background-color: #4776e6;
-  color: #fff;
+  color: black;
 }
