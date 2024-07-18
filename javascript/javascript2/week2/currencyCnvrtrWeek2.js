@@ -1,20 +1,19 @@
+// // JS2 Week1 H.W.
 // An array of currency exchange rate object:
 const allCurrencyRates = [
   {
     base: "USD",
     exRates: {
-      USD: 1,
       GBP: 0.88204,
       EUR: 0.92398,
       CAD: 1.36325,
       SEK: 10.6651,
-      DKK: 6.85431,
+      DKK: 7.85436,
     },
   },
   {
     base: "GBP",
     exRates: {
-      GBP: 1,
       USD: 1.23396,
       EUR: 0.92398,
       CAD: 1.36325,
@@ -25,7 +24,6 @@ const allCurrencyRates = [
   {
     base: "EUR",
     exRates: {
-      EUR: 1,
       USD: 1.23396,
       GBP: 0.88204,
       CAD: 1.36325,
@@ -36,7 +34,6 @@ const allCurrencyRates = [
   {
     base: "CAD",
     exRates: {
-      CAD: 1,
       USD: 1.23396,
       GBP: 0.88204,
       EUR: 0.92398,
@@ -47,7 +44,6 @@ const allCurrencyRates = [
   {
     base: "SEK",
     exRates: {
-      SEK: 1,
       USD: 0.09484,
       GBP: 0.07364,
       EUR: 0.08609,
@@ -58,7 +54,6 @@ const allCurrencyRates = [
   {
     base: "DKK",
     exRates: {
-      DKK: 1,
       USD: 0.14612,
       GBP: 0.11251,
       EUR: 0.13402,
@@ -68,6 +63,7 @@ const allCurrencyRates = [
   },
 ];
 
+// JS2 Week2 H.W.
 // Search function for all currency:
 document.getElementById("searchRate").addEventListener("submit", (event) => {
   event.preventDefault();
@@ -80,18 +76,25 @@ document.getElementById("searchRate").addEventListener("submit", (event) => {
     .value.toUpperCase()
     .trim();
   const searchResult = document.getElementById("searchRateResult");
-
-  const rateObject = allCurrencyRates.find((rate) => rate.base === searchFrom);
-  if (rateObject && rateObject.exRates[searchTo]) {
-    const rate = rateObject.exRates[searchTo];
-    searchResult.textContent = `Your search rate is: 1 ${searchFrom} = ${rate} ${searchTo}`;
-    searchResult.style.color = "black";
+  if (searchFrom === searchTo) {
+    // Special case for identical currencies
+    searchResult.textContent = `Your search rate is: 1 ${searchFrom} = 1 ${searchTo}`;
   } else {
-    searchResult.textContent = "Your search currency do not exist!";
-    searchResult.style.color = "darkred";
+    const rateObject = allCurrencyRates.find(
+      (rate) => rate.base === searchFrom
+    );
+    if (rateObject && rateObject.exRates[searchTo]) {
+      const rate = rateObject.exRates[searchTo];
+      searchResult.textContent = `Your search rate is: 1 ${searchFrom} = ${rate} ${searchTo}`;
+      searchResult.style.color = "black";
+    } else {
+      searchResult.textContent = "Your search currency do not exist!";
+      searchResult.style.color = "darkred";
+    }
   }
 });
 
+// JS2 Week1 H.W.
 // New exchange rate creation function:
 document
   .getElementById("addNewRateform")
@@ -123,6 +126,7 @@ document
     displayRates(allCurrencyRates);
   });
 
+// JS2 Week1 H.W.
 // Currency conversion function:
 document
   .getElementById("convertCurrencyForm")
@@ -140,18 +144,32 @@ document
     const rateObject = allCurrencyRates.find(
       (rate) => rate.base === fromCurrency
     );
-    if (rateObject && rateObject.exRates[toCurrency]) {
-      const convertedAmount = amount * rateObject.exRates[toCurrency];
+
+    if (fromCurrency === toCurrency) {
       const conversionResult = document.getElementById("convertCurrencyResult");
-      conversionResult.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(
-        2
-      )} ${toCurrency}`;
+
+      // Special case for identical currencies
+      conversionResult.textContent =
+        "Please select different currency to convert!";
     } else {
-      const conversionResult = document.getElementById("convertCurrencyResult");
-      conversionResult.textContent = "Conversion rate not available.";
+      if (rateObject && rateObject.exRates[toCurrency]) {
+        const convertedAmount = amount * rateObject.exRates[toCurrency];
+        const conversionResult = document.getElementById(
+          "convertCurrencyResult"
+        );
+        conversionResult.textContent = `${amount} ${fromCurrency} = ${convertedAmount.toFixed(
+          2
+        )} ${toCurrency}`;
+      } else {
+        const conversionResult = document.getElementById(
+          "convertCurrencyResult"
+        );
+        conversionResult.textContent = "Conversion rate not available.";
+      }
     }
   });
 
+// JS2 Week1 H.W.
 // Update existing currency rate function:
 document
   .getElementById("updateRateForm")
@@ -185,6 +203,7 @@ document
     }
   });
 
+// JS2 Week2 H.W.
 // To show the current rate listing:
 function displayRates(ratesArray) {
   const ratesTableBody = document.querySelector("#exRateTable tbody");
@@ -211,5 +230,87 @@ function displayRates(ratesArray) {
     }
   });
 }
-
 displayRates(allCurrencyRates);
+
+//JS2 Week3 H.W.
+// Function to show an announcement when the market open or/and close:
+function showAnnouncement(message) {
+  const announcementDiv = document.getElementById("announcement");
+  announcementDiv.innerText = message;
+  console.log(`Announcement: ${message}`);
+}
+
+// Function to calculate the time until the next 9 AM or 5 PM
+function getNextAnnouncementTime() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const date = now.getDate();
+
+  const openTime = new Date(year, month, date, 9, 0, 0); // 9 AM today
+  const closeTime = new Date(year, month, date, 17, 0, 0); // 5 PM today
+
+  let nextAnnouncement;
+
+  if (now < openTime) {
+    nextAnnouncement = openTime;
+  } else if (now < closeTime) {
+    nextAnnouncement = closeTime;
+  } else {
+    nextAnnouncement = new Date(year, month, date + 1, 9, 0, 0); // 9 AM next day
+  }
+
+  return nextAnnouncement - now; // Time time difference in milliseconds
+}
+
+// Schedule the next announcement
+function scheduleNextAnnouncement() {
+  const timeUntilNextAnnouncement = getNextAnnouncementTime();
+  setTimeout(() => {
+    const now = new Date();
+    if (now.getHours() === 9 && now.getMinutes() === 0) {
+      showAnnouncement("The market is now open!");
+    } else if (now.getHours() === 17 && now.getMinutes() === 0) {
+      showAnnouncement("The market is now closed!");
+    }
+    // Schedule the next announcement
+    scheduleNextAnnouncement();
+  }, timeUntilNextAnnouncement);
+}
+
+// Initial scheduling
+scheduleNextAnnouncement();
+
+// Function to watch currency updates and show a banner message:
+function watchCurrencyUpdates() {
+  setInterval(() => {
+    // Find the object where base currency is USD
+    const usdRates = allCurrencyRates.find((rate) => rate.base === "USD");
+    if (usdRates) {
+      // Get the USD to DKK exchange rate
+      const usdToDkkRate = usdRates.exRates["DKK"]; // Get DKK rate from USD rates
+
+      // Check if 1 USD equals 7 DKK or more
+      if (usdToDkkRate > 6 && usdToDkkRate < 14) {
+        showBanner(
+          `1 USD is now ${usdToDkkRate} DKK! Convert now for maximum gain!`
+        );
+      } else if (usdToDkkRate > 13) {
+        showBanner(
+          `Wow! 1 USD is now ${usdToDkkRate} DKK! Amazing exchange rate! Convert immediately!`
+        );
+      }
+    }
+  }, 30000); // Check every 30 seconds (adjust as needed)
+}
+
+// Function to show banner with the hottest currency exchange rate
+function showBanner(message) {
+  const bannerDiv = document.getElementById("banner");
+  bannerDiv.innerText = message;
+  bannerDiv.style.display = "block"; // Display the banner
+  console.log(`Banner: ${message}`);
+}
+
+// Initial call to start watching currency updates
+watchCurrencyUpdates();
