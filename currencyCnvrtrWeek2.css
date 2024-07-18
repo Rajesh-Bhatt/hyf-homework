@@ -123,20 +123,3 @@ th {
   background-color: #4776e6;
   color: black;
 }
-
-.status {
-  font-size: 20px;
-  font-weight: bold;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.status.open {
-  color: green;
-}
-
-.status.closed {
-  color: red;
-}
