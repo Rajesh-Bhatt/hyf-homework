@@ -14,11 +14,13 @@
           type="text"
           id="search-from"
           placeholder="Base Currency (e.g., USD)"
+          required
         />
         <input
           type="text"
           id="search-to"
           placeholder="Target Currency (e.g., EUR)"
+          required
         />
         <button type="submit">Search Currency</button>
       </form>
@@ -83,6 +85,8 @@
             <button type="submit">Convert</button>
           </form>
           <p id="convertCurrencyResult" class="convertCurrencyResult"></p>
+          <div id="announcement" class="announcement"></div>
+          <div id="banner" class="banner"></div>
         </section>
         <section>
           <h2>Update Existing Rate</h2>
