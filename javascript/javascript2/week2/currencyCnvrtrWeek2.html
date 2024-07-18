@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency Converter Form</title>
+    <link rel="stylesheet" href="currencyCnvrtrWeek2.css" />
+  </head>
+  <body>
+    <div class="startPage">
+      <h1>Currency Converter App</h1>
+      <form id="searchRate">
+        <input
+          type="text"
+          id="search-from"
+          placeholder="Base Currency (e.g., USD)"
+        />
+        <input
+          type="text"
+          id="search-to"
+          placeholder="Target Currency (e.g., EUR)"
+        />
+        <button type="submit">Search Currency</button>
+      </form>
+      <p id="searchRateResult" class="searchRateResult"></p>
+
+      <div>
+        <section>
+          <h2>Add New Currency Rate</h2>
+
+          <form id="addNewRateform">
+            <label for="base-currency">Base Currency:</label>
+            <input
+              type="text"
+              id="base-currency"
+              placeholder="e.g., USD"
+              required
+            />
+            <label for="target-currency">Target Currency:</label>
+            <input
+              type="text"
+              id="target-currency"
+              placeholder="e.g., EUR"
+              required
+            />
+            <label for="exchange-rate">Exchange Rate:</label>
+            <input
+              type="number"
+              id="exchange-rate"
+              step="0.00001"
+              placeholder="e.g., 1.23396"
+              required
+            />
+            <button type="submit">Add Currency Rate</button>
+          </form>
+          <p id="addRateResult" class="addRateResult"></p>
+        </section>
+
+        <section>
+          <h2>Convert Currency</h2>
+          <form id="convertCurrencyForm">
+            <label for="from-currency">From Currency:</label>
+            <input
+              type="text"
+              id="from-currency"
+              placeholder="e.g., USD"
+              required
+            />
+            <label for="to-currency">To Currency:</label>
+            <input
+              type="text"
+              id="to-currency"
+              placeholder="e.g., EUR"
+              required
+            />
+            <label for="exchange-rate">Amount:</label>
+            <input
+              type="number"
+              id="amount"
+              placeholder="e.g., 1.23396"
+              required
+            />
+            <button type="submit">Convert</button>
+          </form>
+          <p id="convertCurrencyResult" class="convertCurrencyResult"></p>
+        </section>
+        <section>
+          <h2>Update Existing Rate</h2>
+          <form id="updateRateForm">
+            <label for="updateBaseCurrency">Base Currency:</label>
+            <input
+              type="text"
+              id="updateBaseCurrency"
+              placeholder="e.g., USD"
+              required
+            />
+            <label for="updateTargetCurrency">Target Currency:</label>
+            <input
+              type="text"
+              id="updateTargetCurrency"
+              placeholder="e.g., EUR"
+              required
+            />
+            <label for="updateExchangeRate">New Exchange Rate:</label>
+            <input
+              type="number"
+              id="updateExchangeRate"
+              step="0.00001"
+              placeholder="e.g., 1.23396"
+              required
+            />
+            <button type="submit">Update Rate</button>
+          </form>
+          <p id="updateRateResult" class="updateRateResult"></p>
+        </section>
+      </div>
+      <div id="currentCurrency" class="currentCurrency">
+        <h2>Current Exchange Rates:</h2>
+      </div>
+      <div id="currencyGrid" class="currencyGrid">
+        <table id="exRateTable">
+          <thead>
+            <tr>
+              <th>Base Currency</th>
+              <th>Target Currency</th>
+              <th>Exchange Rate</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+    <script src="currencyCnvrtrWeek2.js"></script>
+  </body>
+</html>
