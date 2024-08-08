@@ -1,0 +1,125 @@
+.startPage {
+  font-family: "Poppins", sans-serif;
+  background-color: #00abf0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#searchRate {
+  display: inline;
+}
+
+div {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  height: 90%;
+  align-items: center;
+}
+
+section {
+  background-color: #00abf0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px #da0606ac;
+  margin-bottom: 20px;
+  width: 80%;
+  max-width: 400px;
+}
+
+h1 {
+  font-size: 2em;
+  margin-top: 50px;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #030303;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+  text-align: center;
+  font-weight: bold;
+  color: #0a0a0a;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+button {
+  padding: 10px;
+  background: linear-gradient(rgb(3, 3, 3), rgb(52, 51, 51), rgb(4, 4, 4));
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addRateResult,
+.convertCurrencyResult,
+.updateRateResult,
+.searchRateResult {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 15px;
+  color: #333;
+  text-align: center;
+}
+.announcement {
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgb(112, 7, 7);
+}
+.banner {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #8fe647;
+  padding: 10px;
+  text-align: center;
+  display: none;
+}
+
+table {
+  width: 80%;
+  margin: auto;
+  border-collapse: collapse;
+  border-color: white;
+  margin-bottom: 20px;
+}
+table,
+th,
+td {
+  border: 1px solid #ddd;
+}
+th,
+td {
+  padding: 8px;
+  text-align: center;
+}
+th {
+  background-color: #4776e6;
+  color: black;
+}
