@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Currency Converter Form</title>
-    <link rel="stylesheet" href="currencyCnvrtrWeek2.css" />
+    <link rel="stylesheet" href="currencyCnvrtrWeek1.css" />
   </head>
   <body>
     <div class="startPage">
@@ -13,12 +13,18 @@
         <input
           type="text"
           id="search-from"
+          pattern="[A-Za-z]{3}"
+          title="Please enter a valid 3-letter currency code (e.g., USD)"
+          maxlength="3"
           placeholder="Base Currency (e.g., USD)"
           required
         />
         <input
           type="text"
           id="search-to"
+          pattern="[A-Za-z]{3}"
+          title="Please enter a valid 3-letter currency code (e.g., USD)"
+          maxlength="3"
           placeholder="Target Currency (e.g., EUR)"
           required
         />
@@ -35,6 +41,9 @@
             <input
               type="text"
               id="base-currency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., USD"
               required
             />
@@ -42,6 +51,9 @@
             <input
               type="text"
               id="target-currency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., EUR"
               required
             />
@@ -65,6 +77,9 @@
             <input
               type="text"
               id="from-currency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., USD"
               required
             />
@@ -72,6 +87,9 @@
             <input
               type="text"
               id="to-currency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., EUR"
               required
             />
@@ -95,6 +113,9 @@
             <input
               type="text"
               id="updateBaseCurrency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., USD"
               required
             />
@@ -102,6 +123,9 @@
             <input
               type="text"
               id="updateTargetCurrency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., EUR"
               required
             />
@@ -134,6 +158,6 @@
         </table>
       </div>
     </div>
-    <script src="currencyCnvrtrWeek2.js"></script>
+    <script src="currencyCnvrtrWeek1.js"></script>
   </body>
 </html>

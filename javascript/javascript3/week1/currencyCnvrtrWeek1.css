@@ -11,6 +11,10 @@
   display: inline;
 }
 
+#search-from,
+#search-to {
+  border: 1px solid #333;
+}
 div {
   display: flex;
   justify-content: space-evenly;
@@ -27,6 +31,7 @@ section {
   margin-bottom: 20px;
   width: 80%;
   max-width: 400px;
+  border: 1px solid #333;
 }
 
 h1 {
@@ -122,21 +127,4 @@ td {
 th {
   background-color: #4776e6;
   color: black;
-}
-
-.status {
-  font-size: 20px;
-  font-weight: bold;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.status.open {
-  color: green;
-}
-
-.status.closed {
-  color: red;
 }

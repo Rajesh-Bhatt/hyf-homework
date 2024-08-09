@@ -1,67 +1,38 @@
-// // JS2 Week1 H.W.
-// An array of currency exchange rate object:
-const allCurrencyRates = [
-  {
-    base: "USD",
-    exRates: {
-      GBP: 0.88204,
-      EUR: 0.92398,
-      CAD: 1.36325,
-      SEK: 10.6651,
-      DKK: 7.85436,
-    },
-  },
-  {
-    base: "GBP",
-    exRates: {
-      USD: 1.23396,
-      EUR: 0.92398,
-      CAD: 1.36325,
-      SEK: 13.8457,
-      DKK: 8.88382,
-    },
-  },
-  {
-    base: "EUR",
-    exRates: {
-      USD: 1.23396,
-      GBP: 0.88204,
-      CAD: 1.36325,
-      SEK: 11.4933,
-      DKK: 7.46027,
-    },
-  },
-  {
-    base: "CAD",
-    exRates: {
-      USD: 1.23396,
-      GBP: 0.88204,
-      EUR: 0.92398,
-      SEK: 7.81929,
-      DKK: 5.03486,
-    },
-  },
-  {
-    base: "SEK",
-    exRates: {
-      USD: 0.09484,
-      GBP: 0.07364,
-      EUR: 0.08609,
-      CAD: 0.01394,
-      DKK: 0.64985,
-    },
-  },
-  {
-    base: "DKK",
-    exRates: {
-      USD: 0.14612,
-      GBP: 0.11251,
-      EUR: 0.13402,
-      CAD: 0.19867,
-      SEK: 1.57565,
-    },
-  },
-];
+// JS3 Week1 H.W.
+// An empty array of currency exchange rate:
+
+let allCurrencyRates = [];
+
+// Fetches the latest currency rates from a remote JSON file and updates the currency grid:
+async function fetchCurrencyRates() {
+  const url =
+    "https://raw.githubusercontent.com/Rajesh-Bhatt/Rajesh-Bhatt.github.io/main/data/all-currency-rates.json";
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    allCurrencyRates = await response.json();
+    renderCurrencyRates(allCurrencyRates);
+    renderCurrencyGrid();
+  } catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
+    displayFetchError(error);
+  }
+}
+document.addEventListener("DOMContentLoaded", fetchCurrencyRates);
+
+// Function to render currency rates (in console)
+function renderCurrencyRates(data) {
+  console.log("Currency rates:", data);
+}
+
+// Function to display fetch error if network or resource issue is there:
+function displayFetchError(error) {
+  const errorMessageElement = document.createElement("div");
+  errorMessageElement.textContent = `Error fetching currency rates: ${error.message}`;
+  document.body.appendChild(errorMessageElement);
+}
 
 // JS2 Week2 H.W.
 // Search function for all currency:
@@ -103,6 +74,7 @@ document
     const baseCurrency = document
       .getElementById("base-currency")
       .value.toUpperCase()
+      //.value.replace(/[^0-9]/g, "")
       .trim();
     const targetCurrency = document
       .getElementById("target-currency")
@@ -205,11 +177,16 @@ document
 
 // JS2 Week2 H.W.
 // To show the current rate listing:
-function displayRates(ratesArray) {
+function renderCurrencyGrid() {
   const ratesTableBody = document.querySelector("#exRateTable tbody");
-  ratesTableBody.innerHTML = "";
+  if (!ratesTableBody) {
+    console.error("Table body not found");
+    return;
+  }
 
-  ratesArray.forEach((rateObject) => {
+  ratesTableBody.innerHTML = ""; //Clear existing rows
+
+  allCurrencyRates.forEach((rateObject) => {
     const baseCurrency = rateObject.base;
     for (const [targetCurrency, rate] of Object.entries(rateObject.exRates)) {
       const rateRow = document.createElement("tr");
@@ -230,7 +207,6 @@ function displayRates(ratesArray) {
     }
   });
 }
-displayRates(allCurrencyRates);
 
 //JS2 Week3 H.W.
 // Function to show an announcement when the market open or/and close:
@@ -260,7 +236,7 @@ function getNextAnnouncementTime() {
     nextAnnouncement = new Date(year, month, date + 1, 9, 0, 0); // 9 AM next day
   }
 
-  return nextAnnouncement - now; // Time time difference in milliseconds
+  return nextAnnouncement - now; // Time difference in milliseconds
 }
 
 // Schedule the next announcement
