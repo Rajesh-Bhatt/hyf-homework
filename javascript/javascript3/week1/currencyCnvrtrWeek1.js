@@ -1,5 +1,5 @@
 // JS3 Week1 H.W.
-// An empty array of currency exchange rate object:
+// An empty array of currency exchange rate:
 
 let allCurrencyRates = [];
 
