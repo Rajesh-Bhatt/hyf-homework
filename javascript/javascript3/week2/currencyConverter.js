@@ -1,4 +1,4 @@
-// JS3 Week1 H.W.
+// JS3 Week2 H.W.
 // An empty array of currency exchange rate:
 
 let allCurrencyRates = [];
@@ -13,7 +13,6 @@ async function fetchCurrencyRates() {
       throw new Error("Network response was not ok " + response.statusText);
     }
     allCurrencyRates = await response.json();
-
     renderCurrencyGrid();
   } catch (error) {
     console.error("There has been a problem with your fetch operation:", error);
@@ -254,54 +253,6 @@ function initializeAnnouncements() {
 }
 
 initializeAnnouncements();
-
-/*function showAnnouncement(message) {
-  const announcementDiv = document.getElementById("announcement");
-  announcementDiv.innerText = message;
-  console.log(`Announcement: ${message}`);
-}
-
-// Function to calculate the time until the next 9 AM or 5 PM
-function getNextAnnouncementTime() {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
-  const date = now.getDate();
-
-  const openTime = new Date(year, month, date, 9, 0, 0); // 9 AM today
-  const closeTime = new Date(year, month, date, 17, 0, 0); // 5 PM today
-
-  let nextAnnouncement;
-
-  if (now < openTime) {
-    nextAnnouncement = openTime;
-  } else if (now < closeTime) {
-    nextAnnouncement = closeTime;
-  } else {
-    nextAnnouncement = new Date(year, month, date + 1, 9, 0, 0); // 9 AM next day
-  }
-
-  return nextAnnouncement - now; // Time difference in milliseconds
-}
-
-// Schedule the next announcement
-function scheduleNextAnnouncement() {
-  const timeUntilNextAnnouncement = getNextAnnouncementTime();
-  setTimeout(() => {
-    const now = new Date();
-    if (now.getHours() === 9 && now.getMinutes() === 0) {
-      showAnnouncement("The market is now open!");
-    } else if (now.getHours() === 17 && now.getMinutes() === 0) {
-      showAnnouncement("The market is now closed!");
-    }
-    // Schedule the next announcement
-    scheduleNextAnnouncement();
-  }, timeUntilNextAnnouncement);
-}
-
-// Initial scheduling
-scheduleNextAnnouncement();
-*/
 
 // Function to watch currency updates and show a banner message:
 function watchCurrencyUpdates() {

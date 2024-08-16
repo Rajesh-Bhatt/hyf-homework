@@ -8,31 +8,43 @@
   </head>
   <body>
     <div class="startPage">
-      <h1>Currency Converter App</h1>
+      <h3>Market Status:</h3>
+      <div id="countdown">Loading...</div>
+      <h1>Currency Converter</h1>
       <form id="searchRate">
         <input
           type="text"
           id="search-from"
+          pattern="[A-Za-z]{3}"
+          title="Please enter a valid 3-letter currency code (e.g., USD)"
+          maxlength="3"
           placeholder="Base Currency (e.g., USD)"
+          required
         />
         <input
           type="text"
           id="search-to"
+          pattern="[A-Za-z]{3}"
+          title="Please enter a valid 3-letter currency code (e.g., USD)"
+          maxlength="3"
           placeholder="Target Currency (e.g., EUR)"
+          required
         />
         <button type="submit">Search Currency</button>
       </form>
       <p id="searchRateResult" class="searchRateResult"></p>
-
+      <div id="banner" class="banner"></div>
       <div>
         <section>
           <h2>Add New Currency Rate</h2>
-
           <form id="addNewRateform">
             <label for="base-currency">Base Currency:</label>
             <input
               type="text"
               id="base-currency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., USD"
               required
             />
@@ -40,6 +52,9 @@
             <input
               type="text"
               id="target-currency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., EUR"
               required
             />
@@ -63,6 +78,9 @@
             <input
               type="text"
               id="from-currency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., USD"
               required
             />
@@ -70,6 +88,9 @@
             <input
               type="text"
               id="to-currency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., EUR"
               required
             />
@@ -91,6 +112,9 @@
             <input
               type="text"
               id="updateBaseCurrency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., USD"
               required
             />
@@ -98,6 +122,9 @@
             <input
               type="text"
               id="updateTargetCurrency"
+              pattern="[A-Za-z]{3}"
+              title="Please enter a valid 3-letter currency code (e.g., USD)"
+              maxlength="3"
               placeholder="e.g., EUR"
               required
             />
@@ -114,21 +141,23 @@
           <p id="updateRateResult" class="updateRateResult"></p>
         </section>
       </div>
+
       <div id="currentCurrency" class="currentCurrency">
         <h2>Current Exchange Rates:</h2>
       </div>
-      <p id="date"></p>
-      <table id="exchangeRatesTable">
-        <thead>
-          <tr>
-            <th>From Currency</th>
-            <th>Rate</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <div id="currencyGrid" class="currencyGrid">
+        <table id="exRateTable">
+          <thead>
+            <tr>
+              <th>Base Currency</th>
+              <th>Target Currency</th>
+              <th>Exchange Rate</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
-
     <script src="currencyConverter.js"></script>
   </body>
 </html>
