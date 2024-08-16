@@ -18,7 +18,30 @@ const updateRateForm = document.getElementById("updateRateForm");
 const addRateResult = document.getElementById("addRateResult");
 const convertCurrencyResult = document.getElementById("convertCurrencyResult");
 const updateRateResult = document.getElementById("updateRateResult");
+const searchRateResult = document.getElementById("searchRateResult");
 
+// Search function for currency:
+function onRateSearch(event) {
+  event.preventDefault();
+  const searchFrom = document
+    .getElementById("search-from")
+    .value.trim()
+    .toUpperCase();
+  const searchTo = document
+    .getElementById("search-to")
+    .value.trim()
+    .toUpperCase();
+
+  if (exRates.base === searchFrom && exRates.exRates[searchTo]) {
+    const searchedRate = exRates.exRates[searchTo];
+    searchRateResult.textContent = `Your search rate is: 1${searchFrom} = ${searchedRate} ${searchTo}`;
+  } else {
+    searchRateResult.textContent = "Your search currency does not exist!!!";
+  }
+}
+document.getElementById("searchRate").onsubmit = onRateSearch;
+
+// New exchange rate creation function:
 function onNewRateFormSubmitted(event) {
   event.preventDefault();
   const baseCurrency = document
@@ -39,6 +62,7 @@ function onNewRateFormSubmitted(event) {
 }
 document.getElementById("addNewRateform").onsubmit = onNewRateFormSubmitted;
 
+// Currency conversion function:
 function onConversionFormSubmitted(event) {
   event.preventDefault();
   const amount = parseFloat(document.getElementById("amount").value);
@@ -63,6 +87,7 @@ function onConversionFormSubmitted(event) {
 document.getElementById("convertCurrencyForm").onsubmit =
   onConversionFormSubmitted;
 
+// Update existing currency rate function:
 function onUpdateRateSubmitted(event) {
   event.preventDefault();
   const baseCurrency = document
@@ -84,3 +109,24 @@ function onUpdateRateSubmitted(event) {
   }
 }
 document.getElementById("updateRateForm").onsubmit = onUpdateRateSubmitted;
+
+// To show the current rate listing:
+
+document.getElementById("date").textContent = `Rates as of: ${exRates.date}`;
+
+const tableBody = document.querySelector("#exchangeRatesTable tbody");
+const rates = exRates.exRates;
+
+for (const [currency, rate] of Object.entries(rates)) {
+  const row = document.createElement("tr");
+  const currencyCell = document.createElement("td");
+  const rateCell = document.createElement("td");
+
+  currencyCell.textContent = currency;
+  rateCell.textContent = rate.toFixed(5);
+
+  row.appendChild(currencyCell);
+  row.appendChild(rateCell);
+
+  tableBody.appendChild(row);
+}

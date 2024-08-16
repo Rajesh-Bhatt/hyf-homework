@@ -8,7 +8,9 @@
   </head>
   <body>
     <div class="startPage">
-      <h1>Currency Converter App</h1>
+      <h3>Market Status:</h3>
+      <div id="countdown">Loading...</div>
+      <h1>Currency Converter</h1>
       <form id="searchRate">
         <input
           type="text"
@@ -31,11 +33,10 @@
         <button type="submit">Search Currency</button>
       </form>
       <p id="searchRateResult" class="searchRateResult"></p>
-
+      <div id="banner" class="banner"></div>
       <div>
         <section>
           <h2>Add New Currency Rate</h2>
-
           <form id="addNewRateform">
             <label for="base-currency">Base Currency:</label>
             <input
@@ -103,8 +104,6 @@
             <button type="submit">Convert</button>
           </form>
           <p id="convertCurrencyResult" class="convertCurrencyResult"></p>
-          <div id="announcement" class="announcement"></div>
-          <div id="banner" class="banner"></div>
         </section>
         <section>
           <h2>Update Existing Rate</h2>
@@ -142,6 +141,7 @@
           <p id="updateRateResult" class="updateRateResult"></p>
         </section>
       </div>
+
       <div id="currentCurrency" class="currentCurrency">
         <h2>Current Exchange Rates:</h2>
       </div>

@@ -1,5 +1,5 @@
 // JS3 Week1 H.W.
-// An empty array of currency exchange rate:
+// An empty array of currency exchange rate object:
 
 let allCurrencyRates = [];
 
@@ -13,7 +13,7 @@ async function fetchCurrencyRates() {
       throw new Error("Network response was not ok " + response.statusText);
     }
     allCurrencyRates = await response.json();
-
+    renderCurrencyRates(allCurrencyRates);
     renderCurrencyGrid();
   } catch (error) {
     console.error("There has been a problem with your fetch operation:", error);
@@ -21,6 +21,11 @@ async function fetchCurrencyRates() {
   }
 }
 document.addEventListener("DOMContentLoaded", fetchCurrencyRates);
+
+// Function to render currency rates (in console)
+function renderCurrencyRates(data) {
+  console.log("Currency rates:", data);
+}
 
 // Function to display fetch error if network or resource issue is there:
 function displayFetchError(error) {
@@ -69,12 +74,12 @@ document
     const baseCurrency = document
       .getElementById("base-currency")
       .value.toUpperCase()
+      //.value.replace(/[^0-9]/g, "")
       .trim();
     const targetCurrency = document
       .getElementById("target-currency")
       .value.toUpperCase()
       .trim();
-
     const rate = parseFloat(document.getElementById("exchange-rate").value);
 
     let rateObject = allCurrencyRates.find(
@@ -90,7 +95,7 @@ document
     const addRateResult = document.getElementById("addRateResult");
     addRateResult.textContent = `Inserted new rate: 1 ${baseCurrency} = ${rate} ${targetCurrency}`;
     addRateResult.style.color = "black";
-    renderCurrencyGrid();
+    displayRates(allCurrencyRates);
   });
 
 // JS2 Week1 H.W.
@@ -163,7 +168,7 @@ document
       const updateConfirmation = document.getElementById("updateRateResult");
       updateConfirmation.textContent = `Updated rate: 1 ${baseCurrency} = ${rate} ${targetCurrency}`;
       updateConfirmation.style.color = "black";
-      renderCurrencyGrid();
+      displayRates(allCurrencyRates);
     } else {
       const updateConfirmation = document.getElementById("updateRateResult");
       updateConfirmation.textContent = `Base currency do not match with any existing base currency.`;
@@ -205,57 +210,7 @@ function renderCurrencyGrid() {
 
 //JS2 Week3 H.W.
 // Function to show an announcement when the market open or/and close:
-function getTimeRemaining(endTime) {
-  const now = new Date();
-  const timeUntilEvent = endTime - now;
-  const hours = Math.floor(timeUntilEvent / (1000 * 60 * 60));
-  const minutes = Math.floor((timeUntilEvent % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((timeUntilEvent % (1000 * 60)) / 1000);
-  return { timeUntilEvent, hours, minutes, seconds };
-}
-
-function updateCountdownAndStatus(timeUntilEvent, status) {
-  const countDown = document.getElementById("countdown");
-  const formattedMinutes = String(timeUntilEvent.minutes).padStart(2, "0");
-  const formattedSeconds = String(timeUntilEvent.seconds).padStart(2, "0");
-  countDown.innerText = `Market is ${status} until next ${timeUntilEvent.hours}h : ${formattedMinutes}m : ${formattedSeconds}s`;
-  countDown.style.color = status === "open" ? "darkgreen" : "darkred";
-}
-
-function getMarketTimes() {
-  const now = new Date();
-  const marketOpen = new Date(now);
-  const marketClose = new Date(now);
-
-  marketOpen.setHours(9, 0, 0, 0);
-  marketClose.setHours(17, 0, 0, 0);
-
-  if (now >= marketClose) {
-    marketOpen.setDate(marketOpen.getDate() + 1);
-    marketClose.setDate(marketClose.getDate() + 1);
-  }
-
-  return { marketOpen, marketClose };
-}
-
-function initializeAnnouncements() {
-  setInterval(() => {
-    const now = new Date();
-    const { marketOpen, marketClose } = getMarketTimes();
-
-    if (now >= marketOpen && now < marketClose) {
-      const timeRemaining = getTimeRemaining(marketClose);
-      updateCountdownAndStatus(timeRemaining, "open");
-    } else {
-      const timeRemaining = getTimeRemaining(marketOpen);
-      updateCountdownAndStatus(timeRemaining, "closed");
-    }
-  }, 1000);
-}
-
-initializeAnnouncements();
-
-/*function showAnnouncement(message) {
+function showAnnouncement(message) {
   const announcementDiv = document.getElementById("announcement");
   announcementDiv.innerText = message;
   console.log(`Announcement: ${message}`);
@@ -301,7 +256,6 @@ function scheduleNextAnnouncement() {
 
 // Initial scheduling
 scheduleNextAnnouncement();
-*/
 
 // Function to watch currency updates and show a banner message:
 function watchCurrencyUpdates() {
@@ -321,12 +275,9 @@ function watchCurrencyUpdates() {
         showBanner(
           `Wow! 1 USD is now ${usdToDkkRate} DKK! Amazing exchange rate! Convert immediately!`
         );
-      } else {
-        hideBanner();
-        console.log("Banner hidden for rate less than 7");
       }
     }
-  }, 5000); // Check every 30 seconds (adjust as needed)
+  }, 30000); // Check every 30 seconds (adjust as needed)
 }
 
 // Function to show banner with the hottest currency exchange rate
@@ -335,14 +286,6 @@ function showBanner(message) {
   bannerDiv.innerText = message;
   bannerDiv.style.display = "block"; // Display the banner
   console.log(`Banner: ${message}`);
-}
-
-// Function to hide banner with the hottest currency exchange rate
-function hideBanner() {
-  const bannerDiv = document.getElementById("banner");
-  if (banner) {
-    bannerDiv.style.display = "none"; // Hides the banner
-  }
 }
 
 // Initial call to start watching currency updates
