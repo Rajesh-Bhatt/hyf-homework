@@ -88,7 +88,7 @@ document
     console.log("Inserted new rate is:", allCurrencyRates);
     const addRateResult = document.getElementById("addRateResult");
     addRateResult.textContent = `Inserted new rate: 1 ${baseCurrency} = ${rate} ${targetCurrency}`;
-    addRateResult.style.color = "black";
+    //addRateResult.style.color = "black";
     renderCurrencyGrid();
   });
 
@@ -254,33 +254,37 @@ function initializeAnnouncements() {
 
 initializeAnnouncements();
 
-// Function to watch currency updates and show a banner message:
+// Function to watch currency updates and show a banner message with the highest exchange rate:
 function watchCurrencyUpdates() {
   setInterval(() => {
-    // Find the object where base currency is USD
-    const usdRates = allCurrencyRates.find((rate) => rate.base === "USD");
-    if (usdRates) {
-      // Get the USD to DKK exchange rate
-      const usdToDkkRate = usdRates.exRates["DKK"]; // Get DKK rate from USD rates
+    let highestRate = 0;
+    let highestRateBaseCurrency = "";
+    let highestRateTargetCurrency = "";
 
-      // Check if 1 USD equals 7 DKK or more
-      if (usdToDkkRate > 6 && usdToDkkRate < 14) {
-        showBanner(
-          `1 USD is now ${usdToDkkRate} DKK! Convert now for maximum gain!`
-        );
-      } else if (usdToDkkRate > 13) {
-        showBanner(
-          `Wow! 1 USD is now ${usdToDkkRate} DKK! Amazing exchange rate! Convert immediately!`
-        );
-      } else {
-        hideBanner();
-        console.log("Banner hidden for rate less than 7");
+    // Loop through each currency rate object
+    allCurrencyRates.forEach((rateObject) => {
+      const baseCurrency = rateObject.base;
+
+      // Loop through each exchange rate for the current base currency
+      for (const [targetCurrency, rate] of Object.entries(rateObject.exRates)) {
+        if (rate > highestRate) {
+          highestRate = rate;
+          highestRateBaseCurrency = baseCurrency;
+          highestRateTargetCurrency = targetCurrency;
+        }
       }
-    }
-  }, 5000); // Check every 30 seconds (adjust as needed)
-}
+    });
 
-// Function to show banner with the hottest currency exchange rate
+    if (highestRate > 0) {
+      showBanner(
+        `Hottest Rate: 1 ${highestRateBaseCurrency} = ${highestRate} ${highestRateTargetCurrency}! Convert now!`
+      );
+    } else {
+      hideBanner();
+      console.log("No rates found to display.");
+    }
+  }, 5000); // Check in every 5 seconds
+}
 function showBanner(message) {
   const bannerDiv = document.getElementById("banner");
   bannerDiv.innerText = message;

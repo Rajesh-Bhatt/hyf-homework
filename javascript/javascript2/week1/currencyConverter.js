@@ -109,24 +109,3 @@ function onUpdateRateSubmitted(event) {
   }
 }
 document.getElementById("updateRateForm").onsubmit = onUpdateRateSubmitted;
-
-// To show the current rate listing:
-
-document.getElementById("date").textContent = `Rates as of: ${exRates.date}`;
-
-const tableBody = document.querySelector("#exchangeRatesTable tbody");
-const rates = exRates.exRates;
-
-for (const [currency, rate] of Object.entries(rates)) {
-  const row = document.createElement("tr");
-  const currencyCell = document.createElement("td");
-  const rateCell = document.createElement("td");
-
-  currencyCell.textContent = currency;
-  rateCell.textContent = rate.toFixed(5);
-
-  row.appendChild(currencyCell);
-  row.appendChild(rateCell);
-
-  tableBody.appendChild(row);
-}

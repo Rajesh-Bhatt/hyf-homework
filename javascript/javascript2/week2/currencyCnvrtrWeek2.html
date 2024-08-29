@@ -14,13 +14,11 @@
           type="text"
           id="search-from"
           placeholder="Base Currency (e.g., USD)"
-          required
         />
         <input
           type="text"
           id="search-to"
           placeholder="Target Currency (e.g., EUR)"
-          required
         />
         <button type="submit">Search Currency</button>
       </form>
@@ -85,8 +83,6 @@
             <button type="submit">Convert</button>
           </form>
           <p id="convertCurrencyResult" class="convertCurrencyResult"></p>
-          <div id="announcement" class="announcement"></div>
-          <div id="banner" class="banner"></div>
         </section>
         <section>
           <h2>Update Existing Rate</h2>
@@ -121,19 +117,18 @@
       <div id="currentCurrency" class="currentCurrency">
         <h2>Current Exchange Rates:</h2>
       </div>
-      <div id="currencyGrid" class="currencyGrid">
-        <table id="exRateTable">
-          <thead>
-            <tr>
-              <th>Base Currency</th>
-              <th>Target Currency</th>
-              <th>Exchange Rate</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+      <p id="date"></p>
+      <table id="exchangeRatesTable">
+        <thead>
+          <tr>
+            <th>From Currency</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
+
     <script src="currencyCnvrtrWeek2.js"></script>
   </body>
 </html>
