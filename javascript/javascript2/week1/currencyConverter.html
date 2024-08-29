@@ -9,6 +9,21 @@
   <body>
     <div class="startPage">
       <h1>Currency Converter App</h1>
+      <form id="searchRate">
+        <input
+          type="text"
+          id="search-from"
+          placeholder="Base Currency (e.g., USD)"
+        />
+        <input
+          type="text"
+          id="search-to"
+          placeholder="Target Currency (e.g., EUR)"
+        />
+        <button type="submit">Search Currency</button>
+      </form>
+      <p id="searchRateResult" class="searchRateResult"></p>
+
       <div>
         <section>
           <h2>Add New Currency Rate</h2>
@@ -99,8 +114,6 @@
           <p id="updateRateResult" class="updateRateResult"></p>
         </section>
       </div>
-    </div>
-
     <script src="currencyConverter.js"></script>
   </body>
 </html>

@@ -85,14 +85,30 @@ button {
   color: #333;
   text-align: center;
 }
-
-table {
-  width: 70%;
-  margin: auto;
-  border-collapse: collapse;
-  margin-bottom: 20px;
+.announcement {
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgb(112, 7, 7);
+}
+.banner {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #8fe647;
+  padding: 10px;
+  text-align: center;
+  display: none;
 }
 
+table {
+  width: 80%;
+  margin: auto;
+  border-collapse: collapse;
+  border-color: white;
+  margin-bottom: 20px;
+}
 table,
 th,
 td {
@@ -105,5 +121,22 @@ td {
 }
 th {
   background-color: #4776e6;
-  color: #fff;
+  color: black;
+}
+
+.status {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.status.open {
+  color: green;
+}
+
+.status.closed {
+  color: red;
 }
