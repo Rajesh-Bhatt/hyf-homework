@@ -1,15 +1,13 @@
-function calculateAverageFromArgs() {
-  const args = process.argv.slice(2);
-  const numbers = args.map(Number);
-
+function calculateAverage(numbers) {
   if (numbers.length === 0 || numbers.some(isNaN)) {
-    console.log("Please provide a list of numbers separated by spaces.");
+    return "Please provide a valid list of numbers.";
   } else {
     const sum = numbers.reduce((x, y) => x + y, 0);
     const average = sum / numbers.length;
-    console.log(`The average of ${numbers.join(", ")} is ${average}`);
+    return `The average of ${numbers.join(", ")} is ${average}`;
   }
 }
 
-// Call the function to execute the code
-calculateAverageFromArgs();
+// Example of calling the function with input parameters
+const inputNumbers = [10, 20, 30];
+console.log(calculateAverage(inputNumbers));
