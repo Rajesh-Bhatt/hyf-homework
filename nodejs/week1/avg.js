@@ -1,4 +1,4 @@
-function calculateAverage(numbers) {
+function calculateAverage(...numbers) {
   if (numbers.length === 0 || numbers.some(isNaN)) {
     return "Please provide a valid list of numbers.";
   } else {
@@ -8,6 +8,8 @@ function calculateAverage(numbers) {
   }
 }
 
-// Example of calling the function with input parameters
-const inputNumbers = [10, 20, 30];
-console.log(calculateAverage(inputNumbers));
+// Example of calling the function with any number of arguments
+console.log(calculateAverage(10, 20, 30, 40)); // 4 arguments
+console.log(calculateAverage(5, 15, 22)); // 3 arguments
+console.log(calculateAverage(7, 10)); // 2 arguments
+console.log(calculateAverage(7)); // 1 argument
