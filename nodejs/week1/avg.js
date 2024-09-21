@@ -7,7 +7,6 @@ function calculateAverage(...numbers) {
     return `The average of ${numbers.join(", ")} is ${average}`;
   }
 }
-
 // Example of calling the function with any number of arguments
 console.log(calculateAverage(10, 20, 30, 40)); // 4 arguments
 console.log(calculateAverage(5, 15, 22)); // 3 arguments
