@@ -1,0 +1,48 @@
+[
+    {
+      "id": 1,
+      "name": "Used Apple Airpods",
+      "price": "50",
+      "description": "Battery life is not great"
+    },
+    {
+      "id": 2,
+      "type": "doc",
+      "value": "hello world"
+    },
+    {
+      "id": 3,
+      "name": "Samsung Galaxy S10",
+      "price": "200",
+      "description": "Minor scratches on the screen, works perfectly"
+  },
+  {
+      "id": 4,
+      "type": "doc",
+      "value": "Welcome to our new product catalog!"
+  },
+  {
+      "id": 5,
+      "name": "Sony WH-1000XM4 Headphones",
+      "price": "300",
+      "description": "Brand new, noise-cancelling, over-ear headphones"
+  },
+  {
+      "id": 6,
+      "type": "doc",
+      "value": "Limited-time offers available!"
+  },
+  {
+      "id": 7,
+      "name": "Nintendo Switch Console",
+      "price": "250",
+      "description": "Includes two controllers, original packaging, slightly used"
+  },
+  {
+      "id": 8,
+      "type": "doc",
+      "value": "Holiday discounts coming soon!"
+  }
+]
+  
+  
