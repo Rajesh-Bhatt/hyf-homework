@@ -1,4 +1,7 @@
 import knex from "knex";
+import express from "express";
+
+// Set up Knex for MySQL connection
 const knexInstance = knex({
   client: "mysql2",
   connection: {
@@ -11,39 +14,45 @@ const knexInstance = knex({
   },
 });
 
-import express from "express";
 const app = express();
 const port = process.env.PORT || 3000;
-
 app.use(express.json());
-
 const apiRouter = express.Router();
 app.use("/api", apiRouter);
-
 const contactsAPIRouter = express.Router();
 apiRouter.use("/contacts", contactsAPIRouter);
-
 contactsAPIRouter.get("/", async (req, res) => {
-  let query = knexInstance.select("*").from("contacts");
+  let query = knexInstance("contacts");
 
+  // Define valid sorting fields and order
+  const validSortFields = ["first_name", "last_name", "email", "phone"];
+  const validSortOrder = ["ASC", "DESC"];
+
+  // Check for sorting in query parameters
   if ("sort" in req.query) {
-    const orderBy = req.query.sort.toString();
-    if (orderBy.length > 0) {
-      query = query.orderByRaw(orderBy);
+    const [sortField, sortOrder = "ASC"] = req.query.sort.split(" ");
+    if (
+      !validSortFields.includes(sortField.toLowerCase()) ||
+      !validSortOrder.includes(sortOrder.toUpperCase())
+    ) {
+      return res.status(400).json({ message: "Invalid sort parameter" });
     }
+    query = query.orderBy(sortField, sortOrder.toUpperCase());
   }
 
+  // Log the SQL query before execution
   console.log("SQL", query.toSQL().sql);
 
   try {
     const data = await query;
-    res.json({ data });
+    return res.json({ data });
   } catch (e) {
     console.error(e);
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 
+// Start the server
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
