@@ -1,0 +1,9 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/mars-rovers/page": "app/mars-rovers/page.js",
+  "/blogs/page": "app/blogs/page.js",
+  "/page": "app/page.js",
+  "/nasaepic/epic/page": "app/nasaepic/epic/page.js",
+  "/signup/page": "app/signup/page.js",
+  "/nasapod/page": "app/nasapod/page.js"
+}

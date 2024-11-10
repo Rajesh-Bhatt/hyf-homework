@@ -1,0 +1,30 @@
+.panel {
+  padding: 1rem;
+  border-top: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.content {
+  margin-top: 1rem;
+}
+
+.showButton {
+  border: 1px solid #3b82f6;
+  border-radius: 0.375rem;
+  color: #3b82f6;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.showButton:hover {
+  background-color: #ebf8ff;
+}
