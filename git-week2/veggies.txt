@@ -1,5 +1,7 @@
 Carrot
 Spinach
-Cauliflower
+Broccoli
 Tomato
 Onion
+Potato
+Garlic
